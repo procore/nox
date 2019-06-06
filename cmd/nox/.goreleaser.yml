@@ -1,0 +1,40 @@
+---
+archives:
+  -
+    files:
+      - none*
+    replacements:
+      darwin: macOS
+      amd64: 64-bit
+      386: 32-bit
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Arch }}_{{ .Os }}"
+before:
+  hooks:
+    - "go mod download"
+brew:
+  commit_author:
+    email: maxine.krebs@procore.com
+    name: "Maxine Krebs"
+  description: "A grand unified Elasticsearch infrastructure management cli"
+  download_strategy: GitHubPrivateRepositoryReleaseDownloadStrategy
+  folder: Formula
+  github:
+    name: homebrew-formulae
+    owner: procore
+  name: nox
+  test: "system \"#{bin}/nox --help\"\n"
+builds:
+  -
+    env:
+      - CGO_ENABLED=0
+changelog:
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+  sort: asc
+checksum:
+  name_template: checksums.txt
+snapshot:
+  name_template: "{{ .Tag }}-next"
+

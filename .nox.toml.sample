@@ -1,0 +1,9 @@
+tls = false           # disable https communication with server, default true
+debug = true          # enable additional debug logging, default false
+username = "elastic"  # username to use for elasticsearch authentication
+password = "changeme" # password to use for elasticsearch authentication
+host = "localhost"    # host of your elasticsearch cluster, default localhost
+port = "9200"         # port for communcation with cluster, default: 9200
+pretty = false        # toggle pretty printing, default: true
+silent = true         # toggle for silent output. Useful for running in cron jobs, default: false
+theme = "dracula"     # specify the color theme to be used for syntax highlighting, default: rrt, options: https://xyproto.github.io/splash/docs/all.html
