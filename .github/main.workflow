@@ -15,5 +15,4 @@ action "goreleaser" {
   ]
   args = "release"
   needs = ["is-tag"]
-  runs = "cd cmd/nox; goreleaser/goreleaser"
 }

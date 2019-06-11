@@ -24,6 +24,7 @@ brew:
   test: "system \"#{bin}/nox --help\"\n"
 builds:
   -
+    main: ./cmd/nox
     env:
       - CGO_ENABLED=0
 changelog:

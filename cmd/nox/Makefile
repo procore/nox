@@ -1,5 +1,4 @@
 GOCMD=go
-RELEASECMD=goreleaser
 GOINSTALL=$(GOCMD) install
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
@@ -17,12 +16,6 @@ clean:
 	$(GOTIDY)
 	rm -f $(BINARY_NAME)
 	rm -rf ./dist
-next:
-	$(RELEASECMD) --snapshot --skip-publish --rm-dist
-release-dry-run:
-	$(RELEASECMD) release --skip-publish --rm-dist
-release:
-	$(RELEASECMD)
 doc:
 	$(GOBUILD) -o $(BINARY_NAME) -v
 	./$(BINARY_NAME) run meta docs
