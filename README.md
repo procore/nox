@@ -82,7 +82,7 @@ $ nox cluster health
 
 ## Deployment
 
-We use [goreleaser](https://goreleaser.com) and [Travis CI](https://travis-ci.org/) for our build and deployment process. Whenever a new tag is pushed, Travis will run goreleaser to build the binary, update the homebrew tap, and create a Github release.
+We use [goreleaser](https://goreleaser.com) and [Github Actions](https://github.com/features/actions) for our build and deployment process. Whenever a new tag is pushed, a workflow will run goreleaser to build the binary, update the homebrew tap, and create a Github release.
 
 To create a new tag:
 
