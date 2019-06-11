@@ -16,7 +16,6 @@ brew:
     email: maxine.krebs@procore.com
     name: "Maxine Krebs"
   description: "A grand unified Elasticsearch infrastructure management cli"
-  download_strategy: GitHubPrivateRepositoryReleaseDownloadStrategy
   folder: Formula
   github:
     name: homebrew-formulae
