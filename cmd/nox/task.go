@@ -24,5 +24,5 @@ information about the tasks currently executing on one or more nodes in the clus
 
 func init() {
 	rootCmd.AddCommand(taskCmd)
-	taskCmd.Flags().StringVarP(&nodes, "nodes", "n", "", "comma seperated list of nodes to run operation on")
+	taskCmd.Flags().StringVarP(&nodes, "nodes", "n", "", "comma separated list of nodes to run operation on")
 }

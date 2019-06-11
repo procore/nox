@@ -2,7 +2,7 @@
 
 A grand unified Elasticsearch infrastructure management tool.
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+[![Go Report Card](https://goreportcard.com/badge/github.com/procore/nox)](https://goreportcard.com/report/github.com/procore/nox) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 Nox is a Elasticsearch managment CLI and library meant to make everyday interactions with Elaticsearch clusters as easy as possible. From simple API requests, to managing snapshots and disaster recovery, to complex data ETL operations; Nox makes your Elasticsearch operations quick and straightfoward. No curl required.
 
@@ -10,7 +10,7 @@ Nox is a Elasticsearch managment CLI and library meant to make everyday interact
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Installing the CL
+### Installing the CLI
 
 Using `homebrew`
 

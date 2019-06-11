@@ -38,7 +38,7 @@ func DocumentUpdate(index string, id string, body string) string {
 }
 
 // DocumentMultiGet allows to get multiple documents
-// Annoyngly the mget api requries a GET request
+// Annoyngly the mget api requires a GET request
 // AND a request body so we need to call directly
 // against `request` instead of using the `Get` wrapper
 func DocumentMultiGet(index string, body string, fields string) string {

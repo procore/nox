@@ -10,7 +10,7 @@ func NodeStats() string {
 	return Get("_nodes/stats")
 }
 
-// NodeShow info about a specfic node
+// NodeShow info about a specific node
 func NodeShow(node string) string {
 	return Get("_nodes/" + node)
 }
