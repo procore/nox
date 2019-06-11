@@ -10,7 +10,7 @@ import (
 // SnapshotStart starts a snapshot with the given
 // name in the given repo for the given frequency
 func SnapshotStart(n string, r string, f string, b string) string {
-	n, r, f = snapshotdefaultargs(n, r, f)
+	n, r, _ = snapshotdefaultargs(n, r, f)
 	urlParams["wait_for_completion"] = "false"
 	resp := Put("_snapshot/"+r+"/"+n, b)
 	delete(urlParams, "wait_for_completion")
@@ -25,13 +25,13 @@ func SnapshotList(r string) string {
 
 // SnapshotGet returns details on a specific snapshot
 func SnapshotGet(n string, r string, f string) string {
-	n, r, f = snapshotdefaultargs(n, r, f)
+	n, r, _ = snapshotdefaultargs(n, r, f)
 	return Get("_snapshot/" + r + "/" + n)
 }
 
 // SnapshotRestore kicks off a restore for a snapshot
 func SnapshotRestore(n string, r string, f string, b string) string {
-	n, r, f = snapshotdefaultargs(n, r, f)
+	n, r, _ = snapshotdefaultargs(n, r, f)
 	urlParams["wait_for_completion"] = "false"
 	resp := Post("_snapshot/"+r+"/"+n+"/_restore", b)
 	delete(urlParams, "wait_for_completion")
@@ -40,14 +40,14 @@ func SnapshotRestore(n string, r string, f string, b string) string {
 
 // SnapshotDelete deletes a given snapshot
 func SnapshotDelete(n string, r string, f string) string {
-	n, r, f = snapshotdefaultargs(n, r, f)
+	n, r, _ = snapshotdefaultargs(n, r, f)
 	return Delete("_snapshot/" + r + "/" + n)
 }
 
 // SnapshotClean deletes all but a certain number
 // of snapshots
 func SnapshotClean(n int, r string, f string) {
-	_, r, f = snapshotdefaultargs("", r, f)
+	_, r, _ = snapshotdefaultargs("", r, f)
 
 	urlParams["s"] = "end_epoch:desc"
 	urlParams["format"] = "json"

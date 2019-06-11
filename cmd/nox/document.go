@@ -109,9 +109,9 @@ func init() {
 	documentUpdate.Flags().StringVarP(&body, "body", "b", "", "json body to send with this request")
 	documentIndex.Flags().StringVarP(&body, "body", "b", "", "json body to send with this request")
 	documentMultiGet.Flags().StringVarP(&body, "body", "b", "", "json body to send with this request")
-	documentGet.Flags().StringVarP(&fields, "fields", "f", "", "comma seperated list of fields to retrieve")
+	documentGet.Flags().StringVarP(&fields, "fields", "f", "", "comma separated list of fields to retrieve")
 	documentGet.Flags().BoolVarP(&source, "source", "s", false, "retrieve only the _source object")
-	documentMultiGet.Flags().StringVarP(&fields, "fields", "f", "", "comma seperated list of fields to retrieve")
+	documentMultiGet.Flags().StringVarP(&fields, "fields", "f", "", "comma separated list of fields to retrieve")
 	documentDelete.Flags().BoolVarP(&override, "confirm", "y", false, "Confirm that you want to delete a document")
 	documentDeleteByQuery.Flags().BoolVarP(&override, "confirm", "y", false, "Confirm that you want to delete a document")
 }

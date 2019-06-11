@@ -62,7 +62,7 @@ func init() {
 	rootCmd.AddCommand(etlCmd)
 	etlCmd.Flags().StringVar(&destinationIndex, "destination", "", "destination index name, defaults to source index")
 	etlCmd.Flags().StringVar(&keepAlive, "scroll", "1m", "how long to keep the scroll context alive")
-	etlCmd.Flags().StringVar(&sourceFields, "fields", "", "comma seperated list of fields you want to retrieve from the _source object on search")
+	etlCmd.Flags().StringVar(&sourceFields, "fields", "", "comma separated list of fields you want to retrieve from the _source object on search")
 	etlCmd.Flags().IntVar(&batchSize, "batch", 1000, "size of thethe batches of documents per scroll")
 
 	etlCmd.Flags().IntVar(&maxSlices, "threads", 2, "number of slices/threads to split the scroll into")
