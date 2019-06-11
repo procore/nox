@@ -11,10 +11,7 @@ action "is-tag" {
 action "goreleaser" {
   uses = "docker://goreleaser/goreleaser"
   secrets = [
-    "GORELEASER_GITHUB_TOKEN",
-    # either GITHUB_TOKEN or GORELEASER_GITHUB_TOKEN is required
-    "DOCKER_USERNAME",
-    "DOCKER_PASSWORD",
+    "GORELEASER_GITHUB_TOKEN"
   ]
   args = "release"
   needs = ["is-tag"]
