@@ -43,11 +43,17 @@ var catAllocation = &cobra.Command{
 }
 
 var catCount = &cobra.Command{
-	Use:   "count",
+	Use:   "count [index]",
 	Short: "get document counts",
 	Long:  `Count provides quick access to the document count of the entire cluster, or individual indices`,
+	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.Cat(cmd.Name())
+		var response string
+		if len(args) > 0 {
+			response = elastic.CatCountIndex(args[0])
+		} else {
+			response = elastic.Cat(cmd.Name())
+		}
 		printResponse(response)
 	},
 }
