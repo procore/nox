@@ -117,7 +117,7 @@ var catNodes = &cobra.Command{
 }
 
 var catNodeType = &cobra.Command{
-	Use:   "type [node-type]]",
+	Use:   "type [node-type]",
 	Short: "Get info on only a certain type of node",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -203,7 +203,7 @@ var catSnapshots = &cobra.Command{
 	Use:   "snapshots [repository]",
 	Short: "List snapshots in a repo",
 	Long: `Shows all snapshots that belong to a specific repository.
-To find a list of available repositories to query, the command ` + "`cat repositories`" + `can be used`,
+To find a list of available repositories to query, the command ` + "`cat repositories`" + ` can be used`,
 	Args: cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		response := elastic.CatSnapshots(strings.Join(args, ""))
