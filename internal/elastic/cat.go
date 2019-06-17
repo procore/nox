@@ -8,6 +8,11 @@ func Cat(action string) string {
 	return r
 }
 
+// CatCountIndex count documents for a specific index
+func CatCountIndex(index string) string {
+	return Cat("count/" + index)
+}
+
 // CatNodeType Cat nodes of a certain type
 func CatNodeType(nodetype string) []string {
 	resp := Cat("nodes")
