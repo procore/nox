@@ -1,11 +1,6 @@
 workflow "Release" {
   on = "push"
-  resolves = ["goreleaser"]
-}
-
-workflow "Build and Publish CLI Docs" {
-  on = "release"
-  resolves = ["cli-docs"]
+  resolves = ["goreleaser", "cli-docs"]
 }
 
 action "is-tag" {
@@ -29,4 +24,5 @@ action "cli-docs" {
     "GH_USER",
     "GH_EMAIL",
   ]
+  needs = ["is-tag"]
 }
