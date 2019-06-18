@@ -23,7 +23,7 @@ action "goreleaser" {
 }
 
 action "cli-docs" {
-  uses = "./actions/cli-docs"
+  uses = "./clidocs"
   secrets = [
     "GITHUB_TOKEN",
     "GH_USER",
