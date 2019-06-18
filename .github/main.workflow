@@ -26,7 +26,7 @@ action "cli-docs" {
   uses = "./actions/cli-docs"
   secrets = [
     "GITHUB_TOKEN",
-    "GITHUB_USER",
-    "GITHUB_EMAIL",
+    "GH_USER",
+    "GH_EMAIL",
   ]
 }
