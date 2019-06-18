@@ -16,8 +16,7 @@ clean:
 	$(GOTIDY)
 	rm -f $(BINARY_NAME)
 	rm -rf ./dist
-	rm -rf ./docs
-docs:
+doc:
 	$(GOBUILD) -o $(BINARY_NAME) -v
 	./$(BINARY_NAME) run meta docs
 	rm -f $(BINARY_NAME)

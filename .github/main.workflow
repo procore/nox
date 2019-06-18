@@ -1,6 +1,6 @@
 workflow "Release" {
   on = "push"
-  resolves = ["goreleaser", "cli-docs"]
+  resolves = ["goreleaser"]
 }
 
 action "is-tag" {
@@ -14,15 +14,5 @@ action "goreleaser" {
     "GORELEASER_GITHUB_TOKEN",
   ]
   args = "release"
-  needs = ["is-tag"]
-}
-
-action "cli-docs" {
-  uses = "./clidocs"
-  secrets = [
-    "GITHUB_TOKEN",
-    "GH_USER",
-    "GH_EMAIL",
-  ]
   needs = ["is-tag"]
 }
