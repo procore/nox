@@ -12,7 +12,6 @@ import (
 	"time"
 
 	"github.com/Jeffail/gabs"
-	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/viper"
 )
 
@@ -146,7 +145,7 @@ func SendSlackNotification(webhookURL string, msg string) error {
 	if err != nil {
 		return err
 	}
-	spew.Dump(slackBody)
+
 	req.Header.Add("Content-Type", "application/json")
 
 	client := &http.Client{Timeout: 10 * time.Second}
