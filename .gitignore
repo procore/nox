@@ -13,3 +13,6 @@
 
 # Directory for built binaries
 dist
+
+# docs folder
+docs

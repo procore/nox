@@ -3,6 +3,11 @@ workflow "Release" {
   resolves = ["goreleaser"]
 }
 
+workflow "Build and Publish CLI Docs" {
+  on = "release"
+  resolves = ["cli-docs"]
+}
+
 action "is-tag" {
   uses = "actions/bin/filter@master"
   args = "tag"
@@ -15,4 +20,13 @@ action "goreleaser" {
   ]
   args = "release"
   needs = ["is-tag"]
+}
+
+action "cli-docs" {
+  uses = "./actions/cli-docs"
+  secrets = [
+    "GITHUB_TOKEN",
+    "GH_USER",
+    "GH_EMAIL",
+  ]
 }
