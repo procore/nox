@@ -1,6 +1,11 @@
 workflow "Release" {
   on = "push"
-  resolves = ["goreleaser", "fmt", "docs"]
+  resolves = ["goreleaser"]
+}
+
+workflow "Build and Publish CLI Docs" {
+  on = "release"
+  resolves = ["cli-docs"]
 }
 
 action "is-tag" {
@@ -17,15 +22,11 @@ action "goreleaser" {
   needs = ["is-tag"]
 }
 
-action "docs" {
-  uses = "cedrickring/golang-action@1.3.0"
-  args = "make docs"
-  env={
-    PROJECT_PATH = "./cmd/nox"
-  }
-}
-
-action "fmt" {
-  uses = "cedrickring/golang-action@1.3.0"
-  args = "go fmt ."
+action "cli-docs" {
+  uses = "./actions/cli-docs"
+  secrets = [
+    "GITHUB_TOKEN",
+    "GITHUB_USER",
+    "GITHUB_EMAIL",
+  ]
 }
