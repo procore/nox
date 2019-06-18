@@ -22,7 +22,7 @@ $ brew install nox
 Or download the [latest release](https://github.com/procore/nox/releases/latest)
 and extract into your `$PATH`
 
-You can find documentation for the various commands available in the CLI [in the wiki](https://github.com/procore/nox/wiki/nox)
+You can find documentation for the various commands available in the CLI [in the docs folder](./cmd/nox/docs)
 
 Nox has a variety of customization options that are set through command line
 flags for each of its commands. Most of them can be set globally through

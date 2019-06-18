@@ -1,3 +1,0 @@
-[submodule "cmd/nox/docs"]
-	path = cmd/nox/docs
-	url = https://github.com/procore/nox.wiki.git
