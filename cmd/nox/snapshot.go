@@ -9,6 +9,9 @@ import (
 
 var r string
 var f string
+var w bool
+var n bool
+var s string
 var cleanNumber int
 
 var snapshotCmd = &cobra.Command{
@@ -31,7 +34,7 @@ var snapshotStart = &cobra.Command{
 	Short: "Kick off a snapshot",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.SnapshotStart(strings.Join(args, ""), r, f, readFromFile())
+		response := elastic.SnapshotStart(strings.Join(args, ""), r, f, readFromFile(), w, n, s)
 		printResponse(response)
 	},
 }
@@ -60,7 +63,7 @@ var snapshotRestore = &cobra.Command{
 	Short: "Restore a snapshot",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.SnapshotRestore(strings.Join(args, ""), r, f, readFromFile())
+		response := elastic.SnapshotRestore(strings.Join(args, ""), r, f, readFromFile(), w)
 		printResponse(response)
 	},
 }
@@ -105,10 +108,17 @@ func init() {
 	snapshotDelete.Flags().StringVarP(&f, "frequency", "f", "", "Frequency of the snapshot")
 	snapshotDelete.Flags().StringVarP(&r, "repo", "r", "", "Repository for the snapshot")
 
+	snapshotStart.Flags().BoolVarP(&w, "wait", "w", false, "Wait for completion of snapshot")
+	snapshotStart.Flags().BoolVarP(&n, "notify", "n", false, "Send notification to slack")
+	snapshotStart.Flags().StringVarP(&s, "slack", "s", "", "Slack webhook to send snapshot failures to")
+
+	snapshotRestore.Flags().BoolVarP(&w, "wait", "w", false, "Wait for completion of restore")
+
 	snapshotStart.Flags().StringVarP(&body, "body", "b", "", "json body to send with this request")
 	snapshotRestore.Flags().StringVarP(&body, "body", "b", "", "json body to send with this request")
 	snapshotDelete.Flags().BoolVarP(&override, "confirm", "y", false, "Confirm that you want to destroy a snapshot")
 	snapshotClean.Flags().BoolVarP(&override, "confirm", "y", false, "Confirm that you want to destroy a snapshot")
 	snapshotClean.Flags().IntVarP(&cleanNumber, "number", "n", 3, "number of snapshots to keep")
 	snapshotRepoRegister.Flags().StringVarP(&body, "body", "b", "", "json body to send with this request")
+
 }
