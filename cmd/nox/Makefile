@@ -16,10 +16,9 @@ clean:
 	$(GOTIDY)
 	rm -f $(BINARY_NAME)
 	rm -rf ./dist
-	rm -rf ./docs
-docs:
+doc:
 	$(GOBUILD) -o $(BINARY_NAME) -v
-	./$(BINARY_NAME) run meta docs
+	./$(BINARY_NAME) meta docs
 	rm -f $(BINARY_NAME)
 build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_NAME) -v
