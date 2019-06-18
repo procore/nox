@@ -18,7 +18,7 @@ clean:
 	rm -rf ./dist
 doc:
 	$(GOBUILD) -o $(BINARY_NAME) -v
-	./$(BINARY_NAME) run meta docs
+	./$(BINARY_NAME) meta docs
 	rm -f $(BINARY_NAME)
 build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_NAME) -v
