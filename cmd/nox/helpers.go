@@ -67,6 +67,11 @@ func isError(m string) bool {
 }
 
 func printResponse(m string) {
+	fo, _ := os.Stdout.Stat()
+	if (fo.Mode() & os.ModeCharDevice) == 0 {
+		viper.Set("pretty", false)
+	}
+
 	if viper.GetBool("silent") && !isError(m) {
 		return
 	} else if viper.GetBool("pretty") {
