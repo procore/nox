@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 
@@ -43,13 +44,31 @@ func readFromFile() string {
 		return ""
 	}
 
-	body, err := goin.ReadFromFile(tempBufferFileName)
+	var body string
+	var err error
+
+	stat, _ := os.Stdin.Stat()
+	if (stat.Mode() & os.ModeCharDevice) == 0 {
+		body, err = readFromStdin()
+	} else {
+		body, err = goin.ReadFromFile(tempBufferFileName)
+	}
+
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	return body
 
+}
+
+func readFromStdin() (string, error) {
+	bytes, err := ioutil.ReadAll(os.Stdin)
+	if err != nil {
+		return "", err
+	}
+
+	return string(bytes), nil
 }
 
 func isError(m string) bool {
