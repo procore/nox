@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/procore/nox/internal/elastic"
 	"github.com/spf13/cobra"
 )
 
@@ -20,7 +19,7 @@ var documentIndex = &cobra.Command{
 	Long:  "update a typed JSON document in a specific index, making it searchable",
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		printResponse(elastic.DocumentIndex(args[0], args[1], readFromFile()))
+		printResponse(client.DocumentIndex(args[0], args[1], readFromFile()))
 	},
 }
 
@@ -30,7 +29,7 @@ var documentGet = &cobra.Command{
 	Long:  "The get API allows to get a typed JSON document from the index based on its id.",
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		printResponse(elastic.DocumentGet(args[0], args[1], source, fields))
+		printResponse(client.DocumentGet(args[0], args[1], source, fields))
 	},
 }
 
@@ -41,7 +40,7 @@ var documentDelete = &cobra.Command{
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		if confirm() {
-			printResponse(elastic.DocumentDelete(args[0], args[1]))
+			printResponse(client.DocumentDelete(args[0], args[1]))
 		}
 	},
 }
@@ -52,7 +51,7 @@ var documentDeleteByQuery = &cobra.Command{
 	Long:  "The simplest usage of delete_by_query just performs a deletion on every document that match a query",
 	Run: func(cmd *cobra.Command, args []string) {
 		if confirm() {
-			printResponse(elastic.DocumentDeleteByQuery(args[0], readFromFile()))
+			printResponse(client.DocumentDeleteByQuery(args[0], readFromFile()))
 		}
 	},
 }
@@ -66,7 +65,7 @@ runs the script (with optional script language and parameters), and index
 back the result (also allows to delete, or ignore the operation).`,
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		printResponse(elastic.DocumentUpdate(args[0], args[1], readFromFile()))
+		printResponse(client.DocumentUpdate(args[0], args[1], readFromFile()))
 	},
 }
 
@@ -82,7 +81,7 @@ an object containing this error is included in place in the response instead).
 The structure of a successful get is similar in structure to a document provided by the get API.`,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		printResponse(elastic.DocumentMultiGet(args[0], readFromFile(), fields))
+		printResponse(client.DocumentMultiGet(args[0], readFromFile(), fields))
 	},
 }
 
@@ -95,7 +94,7 @@ up the destination index prior to running a _reindex action, including
 setting up mappings, shard counts, replicas, etc.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if confirm() {
-			printResponse(elastic.DocumentReindex(readFromFile()))
+			printResponse(client.DocumentReindex(readFromFile()))
 		}
 	},
 }

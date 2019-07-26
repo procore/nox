@@ -8,7 +8,6 @@ import (
 
 	"github.com/Jeffail/gabs"
 	"github.com/procore/nox/cmd/nox/internal/algorithms"
-	"github.com/procore/nox/internal/elastic"
 	"github.com/spf13/cobra"
 	"gopkg.in/cheggaaa/pb.v1"
 )
@@ -43,7 +42,7 @@ This allows for Elasticsearch data ETL between indicies, and to new indices.`,
 			destinationIndex = sourceIndex
 		}
 
-		total := elastic.Count(sourceIndex, `{"query": { "match_all": {} } }`)
+		total := client.Count(sourceIndex, `{"query": { "match_all": {} } }`)
 		bar = pb.StartNew(total)
 		bar.ShowTimeLeft = true
 		bar.ShowSpeed = true
@@ -92,7 +91,7 @@ func readScroll(i int) {
 	body += `"query": { "match_all": {} },`
 	body += `"sort": [ "_doc"] }`
 
-	page = parseResponse(elastic.Search(sourceIndex, body, searchOptions))
+	page = parseResponse(client.Search(sourceIndex, body, searchOptions))
 	sid = page.Path("_scroll_id").Data().(string)
 	hits, err := page.Path("hits.hits").Children()
 	if err != nil {
@@ -102,7 +101,7 @@ func readScroll(i int) {
 	bar.Add(len(hits))
 	scrollSize = int(page.Path("hits.total").Data().(float64)) - batchSize
 	for scrollSize > 0 {
-		page = parseResponse(elastic.Scroll(sid, keepAlive))
+		page = parseResponse(client.Scroll(sid, keepAlive))
 		sid = page.Path("_scroll_id").Data().(string)
 		hits, err := page.Path("hits.hits").Children()
 		if err != nil {
@@ -112,7 +111,7 @@ func readScroll(i int) {
 		bar.Add(len(hits))
 		scrollSize -= len(hits)
 	}
-	parseResponse(elastic.DeleteScroll(sid))
+	parseResponse(client.DeleteScroll(sid))
 }
 
 // TODO: Allow plugins for user defined etl functions
@@ -128,7 +127,7 @@ func updateDoc(h []*gabs.Container) {
 		}
 	}
 	if len(bulkBody) > 0 && !dryRun {
-		parseResponse(elastic.Bulk(bulkBody))
+		parseResponse(client.Bulk(bulkBody))
 	}
 }
 

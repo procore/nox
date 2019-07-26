@@ -1,4 +1,4 @@
-package elastic
+package gaia
 
 import (
 	"log"
@@ -9,7 +9,8 @@ import (
 // KibanaQuery allows for running kibana-like commands
 // it takes in a command string [METHOD] [ENDPOINT]
 // and a json body and returns the results from ES
-func KibanaQuery(command string, body string) string {
+func (c *Client) KibanaQuery(command string, body string) string {
+	r := c.newRequest()
 	cmdArray := strings.Split(command, " ")
 	if len(cmdArray) != 2 {
 		log.Fatal("Malformed query")
@@ -19,14 +20,17 @@ func KibanaQuery(command string, body string) string {
 
 	switch method {
 	case "GET":
-		return request(http.MethodGet, u, body)
+		r.method = http.MethodGet
 	case "PUT":
-		return request(http.MethodPut, u, body)
+		r.method = http.MethodPut
 	case "POST":
-		return request(http.MethodPost, u, body)
+		r.method = http.MethodPost
 	case "DELETE":
-		return request(http.MethodDelete, u, body)
+		r.method = http.MethodDelete
 	default:
 		return "Unknown method keyword " + method
 	}
+	r.endpoint = u
+	r.body = body
+	return r.do()
 }

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/procore/nox/internal/elastic"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +14,7 @@ var toggleOpen = &cobra.Command{
 	Short: "Open a closed index",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.IndexToggleOpen(cmd.Name(), args[0])
+		response := client.IndexToggleOpen(cmd.Name(), args[0])
 		printResponse(response)
 	},
 }
@@ -25,7 +24,7 @@ var toggleClose = &cobra.Command{
 	Short: "Close an open index",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.IndexToggleOpen(cmd.Name(), args[0])
+		response := client.IndexToggleOpen(cmd.Name(), args[0])
 		printResponse(response)
 	},
 }
@@ -36,7 +35,7 @@ var indexDelete = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		if confirm() {
-			response := elastic.IndexDelete(args[0])
+			response := client.IndexDelete(args[0])
 			printResponse(response)
 		}
 	},

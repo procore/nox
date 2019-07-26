@@ -1,7 +1,6 @@
 ---
 archives:
-  -
-    files:
+  - files:
       - none*
     replacements:
       darwin: macOS
@@ -23,8 +22,7 @@ brew:
   name: nox
   test: "system \"#{bin}/nox --help\"\n"
 builds:
-  -
-    main: ./cmd/nox
+  - main: ./
     env:
       - CGO_ENABLED=0
 changelog:
@@ -37,4 +35,3 @@ checksum:
   name_template: checksums.txt
 snapshot:
   name_template: "{{ .Tag }}-next"
-

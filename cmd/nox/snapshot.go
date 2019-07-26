@@ -3,7 +3,6 @@ package main
 import (
 	"strings"
 
-	"github.com/procore/nox/internal/elastic"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +23,7 @@ var snapshotRepoRegister = &cobra.Command{
 	Short: "Register a new snapshot repository",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.SnapshotRepoRegister(strings.Join(args, ""), readFromFile())
+		response := client.SnapshotRepoRegister(strings.Join(args, ""), readFromFile())
 		printResponse(response)
 	},
 }
@@ -34,7 +33,7 @@ var snapshotStart = &cobra.Command{
 	Short: "Kick off a snapshot",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.SnapshotStart(strings.Join(args, ""), r, f, readFromFile(), w, n, s)
+		response := client.SnapshotStart(strings.Join(args, ""), r, readFromFile(), w, n, s)
 		printResponse(response)
 	},
 }
@@ -43,7 +42,7 @@ var snapshotList = &cobra.Command{
 	Use:   "list",
 	Short: "List your available snapshots",
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.SnapshotList(r)
+		response := client.SnapshotList(r)
 		printResponse(response)
 	},
 }
@@ -53,7 +52,7 @@ var snapshotGet = &cobra.Command{
 	Short: "Get details about a snapshot",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.SnapshotGet(strings.Join(args, ""), r, f)
+		response := client.SnapshotGet(strings.Join(args, ""), r)
 		printResponse(response)
 	},
 }
@@ -63,7 +62,7 @@ var snapshotRestore = &cobra.Command{
 	Short: "Restore a snapshot",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.SnapshotRestore(strings.Join(args, ""), r, f, readFromFile(), w)
+		response := client.SnapshotRestore(strings.Join(args, ""), r, readFromFile(), w)
 		printResponse(response)
 	},
 }
@@ -74,7 +73,7 @@ var snapshotDelete = &cobra.Command{
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		if confirm() {
-			response := elastic.SnapshotDelete(strings.Join(args, ""), r, f)
+			response := client.SnapshotDelete(strings.Join(args, ""), r)
 			printResponse(response)
 		}
 	},
@@ -86,7 +85,7 @@ var snapshotClean = &cobra.Command{
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		if confirm() {
-			elastic.SnapshotClean(cleanNumber, r, f)
+			client.SnapshotClean(cleanNumber, r)
 		}
 	},
 }

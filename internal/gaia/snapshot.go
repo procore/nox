@@ -1,4 +1,4 @@
-package elastic
+package gaia
 
 import (
 	"bytes"
@@ -42,14 +42,26 @@ type SlackRequestBody struct {
 }
 
 // SnapshotStart starts a snapshot with the given
-// name in the given repo for the given frequency.
+// name in the given repo.
 // Waits for completion if w and sends a notification
 // if notify to slack webhook s
-func SnapshotStart(n string, r string, f string, b string, w bool, notify bool, s string) string {
-	n, r, f = snapshotdefaultargs(n, r, f)
-	urlParams["wait_for_completion"] = strconv.FormatBool(w)
-	resp := Put("_snapshot/"+r+"/"+n, b)
-	delete(urlParams, "wait_for_completion")
+// Args:
+// 	- n string
+//		name of the snapshot
+//  - r string
+//  	repository in which the snapshot is located
+//	- b string
+//		snapshot request body
+//	- w bool
+// 		whether or not to wait for completion
+//  - notify bool
+//		whether or not to send notification once snapshot is finished
+//  - s string
+//		slack webhook to send the notification to
+func (c *Client) SnapshotStart(n string, r string, b string, w bool, notify bool, s string) string {
+	req := request{client: c}
+	req.params["wait_for_completion"] = strconv.FormatBool(w)
+	resp := req.put("_snapshot/"+r+"/"+n, b)
 
 	if notify {
 		sr := &SnapshotResult{}
@@ -77,40 +89,64 @@ func SnapshotStart(n string, r string, f string, b string, w bool, notify bool, 
 }
 
 // SnapshotList lists all snapshots in a repo
-func SnapshotList(r string) string {
-	_, r, _ = snapshotdefaultargs("", r, "")
-	return Get("_snapshot/" + r + "/_all")
+// Args:
+//  - r string
+//  	repository name
+func (c *Client) SnapshotList(r string) string {
+	req := request{client: c}
+	return req.get("_snapshot/" + r + "/_all")
 }
 
 // SnapshotGet returns details on a specific snapshot
-func SnapshotGet(n string, r string, f string) string {
-	n, r, f = snapshotdefaultargs(n, r, f)
-	return Get("_snapshot/" + r + "/" + n)
+// Args:
+// 	- n string
+//		name of the snapshot
+//  - r string
+//  	repository in which the snapshot is located
+func (c *Client) SnapshotGet(n string, r string) string {
+	req := request{client: c}
+	return req.get("_snapshot/" + r + "/" + n)
 }
 
 // SnapshotRestore kicks off a restore for a snapshot
-func SnapshotRestore(n string, r string, f string, b string, w bool) string {
-	n, r, f = snapshotdefaultargs(n, r, f)
-	urlParams["wait_for_completion"] = strconv.FormatBool(w)
-	resp := Post("_snapshot/"+r+"/"+n+"/_restore", b)
-	delete(urlParams, "wait_for_completion")
-	return resp
+// Args:
+// 	- n string
+//		name of the snapshot
+//  - r string
+//  	repository in which the snapshot is located
+//	- b string
+//		snapshot request body
+//	- w bool
+// 		whether or not to wait for completion
+func (c *Client) SnapshotRestore(n string, r string, b string, w bool) string {
+	req := request{client: c}
+	req.params["wait_for_completion"] = strconv.FormatBool(w)
+	return req.post("_snapshot/"+r+"/"+n+"/_restore", b)
 }
 
 // SnapshotDelete deletes a given snapshot
-func SnapshotDelete(n string, r string, f string) string {
-	n, r, f = snapshotdefaultargs(n, r, f)
-	return Delete("_snapshot/" + r + "/" + n)
+// Args:
+// 	- n string
+//		name of the snapshot
+//  - r string
+//  	repository in which the snapshot is located
+func (c *Client) SnapshotDelete(n string, r string) string {
+	req := request{client: c}
+	return req.delete("_snapshot/" + r + "/" + n)
 }
 
 // SnapshotClean deletes all but a certain number
 // of snapshots
-func SnapshotClean(n int, r string, f string) {
-	_, r, f = snapshotdefaultargs("", r, f)
-
-	urlParams["s"] = "end_epoch:desc"
-	urlParams["format"] = "json"
-	parsedJSON, err := gabs.ParseJSON([]byte(Get("_cat/snapshots/" + r)))
+// Args:
+// 	- n string
+//		number of snapshots to keep
+//  - r string
+//  	repository in which the snapshots are located
+func (c *Client) SnapshotClean(n int, r string) {
+	req := request{client: c}
+	req.params["s"] = "end_epoch:desc"
+	req.params["format"] = "json"
+	parsedJSON, err := gabs.ParseJSON([]byte(req.get("_cat/snapshots/" + r)))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -120,20 +156,24 @@ func SnapshotClean(n int, r string, f string) {
 		log.Fatal(err)
 	}
 
-	urlParams = map[string]string{"pretty": "true"}
+	req = request{client: c}
+	req.params["pretty"] = "true"
 	for _, snap := range a {
 		if sid, ok := snap.Path("id").Data().(string); ok {
-			Delete("_snapshot/" + r + "/" + fmt.Sprintf("%s", sid))
+			req.delete("_snapshot/" + r + "/" + fmt.Sprintf("%s", sid))
 		}
 	}
-	delete(urlParams, "s")
-	delete(urlParams, "format")
 }
 
 // SnapshotRepoRegister register a new repository for snapshots
-func SnapshotRepoRegister(r string, b string) string {
-	_, r, _ = snapshotdefaultargs("", r, "")
-	return Post("_snapshot/"+r, b)
+// Args:
+//  - r string
+//  	repository in which the snapshots are located
+//	- b string
+//		request body
+func (c *Client) SnapshotRepoRegister(r string, b string) string {
+	req := request{client: c}
+	return req.post("_snapshot/"+r, b)
 }
 
 // SendSlackNotification sends a message to a slack webhook to post

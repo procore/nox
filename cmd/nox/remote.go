@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/procore/nox/internal/elastic"
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +10,7 @@ var remoteCmd = &cobra.Command{
 	Short: "tool for managing remote clusters",
 	Long:  `The cluster remote info API allows to retrieve all of the configured remote cluster information`,
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.RemoteInfo()
+		response := client.RemoteInfo()
 		printResponse(response)
 	},
 }
