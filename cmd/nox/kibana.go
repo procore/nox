@@ -18,7 +18,7 @@ var kibanaCmd = &cobra.Command{
 	Short:   "Run a kibana style query",
 	Long: `The kibana command opens an editor that allows you to enter any query that is
 compatible with the kibana dev tools console. The first line must be the HTTP keyword
-and the endpoind. The second line starts your JSON request body. Example:
+and the endpoint. The second line starts your JSON request body. Example:
 
 GET <index_name>/_search/
 {
