@@ -160,8 +160,9 @@ This last type is called a local store recovery and is the normal way for shards
 }
 
 var catRepositories = &cobra.Command{
-	Use:   "repositories",
-	Short: "Shows the snapshot repositories registered in the cluster",
+	Use:     "repositories",
+	Aliases: []string{"repos"},
+	Short:   "Shows the snapshot repositories registered in the cluster",
 	Run: func(cmd *cobra.Command, args []string) {
 		response := elastic.Cat(cmd.Name())
 		printResponse(response)
