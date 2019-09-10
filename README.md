@@ -36,7 +36,7 @@ list](https://xyproto.github.io/splash/docs/all.html).
 
 ### Prerequisites
 
-You need to have Go 1.12.4 or greater installed to compile nox from source. You can download a Go installer for your system on the [website](https://golang.org/doc/install). Alternatively you can install Go using the [`asdf](https://asdf-vm.com/#/core-manage-asdf-vm)` version manager.
+You need to have Go 1.13 or greater installed to compile nox from source. You can download a Go installer for your system on the [website](https://golang.org/doc/install). Alternatively you can install Go using the [`asdf](https://asdf-vm.com/#/core-manage-asdf-vm)` version manager.
 
 ```bash
 $ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.2
@@ -49,7 +49,7 @@ $ asdf global golang <version_number>
 
 ```bash
 $ go version
-go version go1.12.4 darwin/amd64
+go version go1.13 darwin/amd64
 $ git clone git@github.com:procore/nox.git
 $ cd nox/cmd/nox
 $ make build
