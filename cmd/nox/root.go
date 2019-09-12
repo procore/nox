@@ -5,7 +5,7 @@ import (
 	"os"
 
 	homedir "github.com/mitchellh/go-homedir"
-	"github.com/procore/nox/internal/gaia"
+	"github.com/procore/gaia"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

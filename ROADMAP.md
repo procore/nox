@@ -11,8 +11,8 @@ A broad, non-binding, estimated plan for features and support for future Nox ver
 Cover some blind spots and prep `elastic` package for wider use
 
 * test suite
-* better/more inclusive/more helpful godocs
-* More Portable `elastic` package
+* ~better/more inclusive/more helpful godocs~
+* ~More Portable `elastic` package~
 * helper commands for arbitrary api requests
 
 ## v0.3.0
