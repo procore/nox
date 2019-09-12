@@ -13,6 +13,6 @@ action "goreleaser" {
   secrets = [
     "GORELEASER_GITHUB_TOKEN",
   ]
-  args = "release"
+  args = "release --config=./cmd/nox/.goreleaser.yml"
   needs = ["is-tag"]
 }

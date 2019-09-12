@@ -3,7 +3,6 @@ package main
 import (
 	"strings"
 
-	"github.com/procore/nox/internal/elastic"
 	"github.com/spf13/cobra"
 )
 
@@ -20,7 +19,7 @@ var clusterInfo = &cobra.Command{
 	Use:   "info",
 	Short: "tool for managing clusters",
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.ClusterInfo()
+		response := client.ClusterInfo()
 		printResponse(response)
 	},
 }
@@ -30,7 +29,7 @@ var clusterHealth = &cobra.Command{
 	Short: "view cluster health",
 	Long:  `The cluster health API allows to get a very simple status on the health of the cluster`,
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.ClusterHealth()
+		response := client.ClusterHealth()
 		printResponse(response)
 	},
 }
@@ -40,7 +39,7 @@ var clusterState = &cobra.Command{
 	Short: "view cluster state",
 	Long:  `The cluster state API allows to get a comprehensive state information of the whole cluster`,
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.ClusterState()
+		response := client.ClusterState()
 		printResponse(response)
 	},
 }
@@ -52,7 +51,7 @@ var clusterStats = &cobra.Command{
 The API returns basic index metrics (shard numbers, store size, memory usage) and information
 about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).`,
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.ClusterStats()
+		response := client.ClusterStats()
 		printResponse(response)
 	},
 }
@@ -63,7 +62,7 @@ var clusterPendingTasks = &cobra.Command{
 	Long: `The pending cluster tasks API returns a list of any cluster-level changes
 (e.g. create index, update mapping, allocate or fail shard) which have not yet been executed.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.ClusterPendingTasks()
+		response := client.ClusterPendingTasks()
 		printResponse(response)
 	},
 }
@@ -76,7 +75,7 @@ allocation command including specific commands. For example, a shard can be
 moved from one node to another explicitly, an allocation can be canceled,
 or an unassigned shard can be explicitly allocated on a specific node.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.ClusterReroute(readFromFile())
+		response := client.ClusterReroute(readFromFile())
 		printResponse(response)
 	},
 }
@@ -85,7 +84,7 @@ var settingsCmd = &cobra.Command{
 	Use:   "settings",
 	Short: "view cluster wide settings",
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.ClusterSettings(flatSettings)
+		response := client.ClusterSettings(flatSettings)
 		printResponse(response)
 	},
 }
@@ -102,7 +101,7 @@ var settingsUpdate = &cobra.Command{
 Settings updated can either be persistent (applied across restarts)
 or transient (will not survive a full cluster restart).`,
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.ClusterUpdateSettings(readFromFile(), flatSettings)
+		response := client.ClusterUpdateSettings(readFromFile(), flatSettings)
 		printResponse(response)
 	},
 }
@@ -114,7 +113,7 @@ var toggleRouting = &cobra.Command{
 	Args:      cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		value := strings.ToLower(args[0])
-		response := elastic.ToggleRouting(value, flatSettings)
+		response := client.ToggleRouting(value, flatSettings)
 		printResponse(response)
 	},
 }

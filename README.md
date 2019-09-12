@@ -6,6 +6,8 @@ A grand unified Elasticsearch infrastructure management tool.
 
 Nox is a Elasticsearch managment CLI and library meant to make everyday interactions with Elaticsearch clusters as easy as possible. From simple API requests, to managing snapshots and disaster recovery, to complex data ETL operations; Nox makes your Elasticsearch operations quick and straightfoward. No curl required.
 
+Nox uses the [Gaia](https://github.com/procore/gaia) package as a client to interact with the Elasticsearch cluster.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.

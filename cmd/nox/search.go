@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/procore/nox/internal/elastic"
 	"github.com/spf13/cobra"
 )
 
@@ -10,7 +9,7 @@ var searchCmd = &cobra.Command{
 	Short: "run a search",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		printResponse(elastic.Search(args[0], readFromFile(), nil))
+		printResponse(client.Search(args[0], readFromFile(), nil))
 	},
 }
 

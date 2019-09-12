@@ -4,7 +4,6 @@ import (
 	"log"
 	"strings"
 
-	"github.com/procore/nox/internal/elastic"
 	"github.com/softpunks/goin"
 	"github.com/spf13/cobra"
 )
@@ -51,7 +50,7 @@ GET <index_name>/_search/
 		c, a := a[0], a[1:]
 
 		s := strings.Join(a, "")
-		printResponse(elastic.KibanaQuery(c, s))
+		printResponse(client.KibanaQuery(c, s))
 	},
 }
 

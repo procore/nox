@@ -5,16 +5,18 @@ import (
 	"os"
 
 	homedir "github.com/mitchellh/go-homedir"
-	"github.com/procore/nox/internal/elastic"
+	"github.com/procore/gaia"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-var cfgFile string
-var override bool
-var body string
-
-var version string
+var (
+	client   *gaia.Client
+	cfgFile  string
+	override bool
+	body     string
+	version  string
+)
 
 var rootCmd = &cobra.Command{
 	Use:     "nox",
@@ -22,7 +24,7 @@ var rootCmd = &cobra.Command{
 	Long:    `A grand unified elasticsearch cli`,
 	Version: version,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		configESClient()
+		client = configESClient()
 	},
 }
 
@@ -81,14 +83,14 @@ func initConfig() {
 
 }
 
-func configESClient() {
-	elastic.InitConfig(&elastic.Config{
-		TLS:      viper.GetBool("tls"),
-		Username: viper.GetString("username"),
-		Password: viper.GetString("password"),
-		Debug:    viper.GetBool("debug"),
-		Host:     viper.GetString("host"),
-		Port:     viper.GetString("port"),
-		Pretty:   viper.GetBool("pretty"),
-	})
+func configESClient() *gaia.Client {
+	config := gaia.NewConfig()
+	config.Net.TLS.Enable = viper.GetBool("tls")
+	config.User.Name = viper.GetString("username")
+	config.User.Password = viper.GetString("password")
+	config.Debug = viper.GetBool("debug")
+	config.Net.Host = viper.GetString("host")
+	config.Net.Port = viper.GetString("port")
+	config.Pretty = viper.GetBool("pretty")
+	return gaia.NewClient(config)
 }

@@ -3,7 +3,6 @@ package main
 import (
 	"strings"
 
-	"github.com/procore/nox/internal/elastic"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +16,7 @@ var taskCmd = &cobra.Command{
 information about the tasks currently executing on one or more nodes in the cluster`,
 	Args: cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		response := elastic.GetTask(strings.Join(args, ""), nodes)
+		response := client.GetTask(strings.Join(args, ""), nodes)
 		printResponse(response)
 	},
 }
