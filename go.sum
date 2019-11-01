@@ -113,6 +113,10 @@ github.com/procore/gaia v0.0.0-20190912161702-f30d6bb900f8 h1:8EfIQY9VVP3aPXXzbW
 github.com/procore/gaia v0.0.0-20190912161702-f30d6bb900f8/go.mod h1:0ERivvM/3qFSHSV0KFHaGBOQdGK2hrf24Cb7MrI6V1Q=
 github.com/procore/gaia v0.1.0 h1:NBKLJ6waG6Ya7/7+WlUrW40ygrXqmzUEzt/qzty7/cs=
 github.com/procore/gaia v0.1.0/go.mod h1:yfgUfPSZmJKzUkfmMRIq3SWVfPmiI2w7m/AaWvJTVJw=
+github.com/procore/gaia v0.1.1 h1:XAw82eOQ7ulPpBJfe6jNQFFgtgfJ1YiUnte+hZcd7qg=
+github.com/procore/gaia v0.1.1/go.mod h1:yfgUfPSZmJKzUkfmMRIq3SWVfPmiI2w7m/AaWvJTVJw=
+github.com/procore/gaia v0.1.2 h1:1lg6gcnpM64j9YJHJAwUemJLm98FH2bQpeEMrWCN+ww=
+github.com/procore/gaia v0.1.2/go.mod h1:yfgUfPSZmJKzUkfmMRIq3SWVfPmiI2w7m/AaWvJTVJw=
 github.com/prometheus/client_golang v0.9.1/go.mod h1:7SWBe2y4D6OKWSNQJUaRYU/AaXPKyh/dDVn+NZz0KFw=
 github.com/prometheus/client_golang v0.9.3/go.mod h1:/TN21ttK/J9q6uSwhBd54HahCDft0ttaMvbicHlPoso=
 github.com/prometheus/client_model v0.0.0-20180712105110-5c3871d89910/go.mod h1:MbSGuTsp3dbXC40dX6PRTWyKYBIrTGTE9sqQNg2J8bo=

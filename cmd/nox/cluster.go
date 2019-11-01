@@ -80,6 +80,15 @@ or an unassigned shard can be explicitly allocated on a specific node.`,
 	},
 }
 
+var clusterAllocationExplain = &cobra.Command{
+	Use:   "allocation",
+	Short: "view explanation for cluster allocation attemps",
+	Run: func(cmd *cobra.Command, args []string) {
+		response := client.AllocationExplain()
+		printResponse(response)
+	},
+}
+
 var settingsCmd = &cobra.Command{
 	Use:   "settings",
 	Short: "view cluster wide settings",
@@ -123,7 +132,7 @@ func init() {
 	clusterCmd.AddCommand(clusterUpdate)
 	clusterUpdate.AddCommand(settingsUpdate, toggleRouting)
 	clusterCmd.AddCommand(clusterHealth, clusterState, clusterStats, settingsCmd,
-		clusterPendingTasks, clusterReroute, clusterInfo)
+		clusterPendingTasks, clusterReroute, clusterInfo, clusterAllocationExplain)
 
 	clusterUpdate.PersistentFlags().BoolVarP(&flatSettings, "flat", "f", false, "toggle settings are returned in a flat format")
 
