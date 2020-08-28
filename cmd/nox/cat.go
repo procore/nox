@@ -22,9 +22,10 @@ The cat API aims to meet this need.`,
 }
 
 var catAliases = &cobra.Command{
-	Use:   "aliases",
-	Short: "list configured aliases",
-	Long:  `Aliases shows information about currently configured aliases to indices including filter and routing infos.`,
+	Use:     "aliases",
+	Aliases: []string{"alias"},
+	Short:   "list configured aliases",
+	Long:    `Aliases shows information about currently configured aliases to indices including filter and routing infos.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		response := client.Cat(cmd.Name())
 		printResponse(response)
@@ -78,9 +79,10 @@ var catHealth = &cobra.Command{
 }
 
 var catIndices = &cobra.Command{
-	Use:   "indices",
-	Short: "summary of all indices",
-	Long:  `The indices command provides a cross-section of each index. This information spans nodes.`,
+	Use:     "indices",
+	Aliases: []string{"index", "indexes"},
+	Short:   "summary of all indices",
+	Long:    `The indices command provides a cross-section of each index. This information spans nodes.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		response := client.Cat(cmd.Name())
 		printResponse(response)

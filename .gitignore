@@ -13,3 +13,5 @@
 
 # Directory for built binaries
 dist
+
+cmd/nox/nox
