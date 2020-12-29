@@ -17,7 +17,7 @@ brews:
       name: "Maxine Krebs"
     description: "A grand unified Elasticsearch infrastructure management cli"
     folder: Formula
-    github:
+    tap:
       name: homebrew-formulae
       owner: procore
     name: nox
