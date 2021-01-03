@@ -10,17 +10,18 @@ archives:
 before:
   hooks:
     - "go mod download"
-brew:
-  commit_author:
-    email: maxine.krebs@procore.com
-    name: "Maxine Krebs"
-  description: "A grand unified Elasticsearch infrastructure management cli"
-  folder: Formula
-  github:
-    name: homebrew-formulae
-    owner: procore
-  name: nox
-  test: "system \"#{bin}/nox --help\"\n"
+brews:
+  -
+    commit_author:
+      email: maxine.krebs@procore.com
+      name: "Maxine Krebs"
+    description: "A grand unified Elasticsearch infrastructure management cli"
+    folder: Formula
+    tap:
+      name: homebrew-formulae
+      owner: procore
+    name: nox
+    test: "system \"#{bin}/nox --help\"\n"
 builds:
   - main: ./
     env:
