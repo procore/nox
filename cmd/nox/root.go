@@ -15,14 +15,14 @@ var (
 	cfgFile  string
 	override bool
 	body     string
-	version  string
+	Version  string
 )
 
 var rootCmd = &cobra.Command{
 	Use:     "nox",
 	Short:   "Elasticsearch infrastructure management tool",
 	Long:    `A grand unified elasticsearch cli`,
-	Version: version,
+	Version: Version,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		client = configESClient()
 	},
@@ -48,6 +48,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "toggle debug setting")
 	rootCmd.PersistentFlags().Bool("pretty", true, "toggle pretty printing of returned json")
 	rootCmd.PersistentFlags().Bool("silent", false, "toggle silent output")
+	rootCmd.SetVersionTemplate(Version + "\n")
 
 	viper.BindPFlag("tls", rootCmd.PersistentFlags().Lookup("tls"))
 	viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))

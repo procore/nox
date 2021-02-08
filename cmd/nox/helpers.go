@@ -8,8 +8,8 @@ import (
 	"os"
 
 	"github.com/manifoldco/promptui"
-	"github.com/softpunks/chroma/quick"
-	"github.com/softpunks/goin"
+	"github.com/maxinehazel/chroma/quick"
+	"github.com/maxinehazel/goin"
 	"github.com/spf13/viper"
 )
 

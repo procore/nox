@@ -4,7 +4,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/softpunks/goin"
+	"github.com/maxinehazel/goin"
 	"github.com/spf13/cobra"
 )
 

@@ -1,11 +1,13 @@
+export VERSION=$$(git describe --tags --abbrev=0)
 GOCMD=go
 GOINSTALL=$(GOCMD) install
-GOBUILD=$(GOCMD) build
+GOBUILD=$(GOCMD) build -ldflags "-X main.Version=$(VERSION)"
 GOCLEAN=$(GOCMD) clean
 GORUN =$(GOCMD) run main.go
 GOTIDY=$(GOCMD) mod tidy
 BINARY_NAME=nox
 RELEASECMD=goreleaser release
+
 
 all: install
 install:
