@@ -8,7 +8,6 @@ GOTIDY=$(GOCMD) mod tidy
 BINARY_NAME=nox
 RELEASECMD=goreleaser release
 
-
 all: install
 install:
 	$(GOINSTALL)
