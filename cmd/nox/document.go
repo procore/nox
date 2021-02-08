@@ -102,7 +102,7 @@ setting up mappings, shard counts, replicas, etc.`,
 func init() {
 	rootCmd.AddCommand(documentCMD)
 	documentCMD.AddCommand(documentGet, documentIndex, documentDelete,
-		documentDeleteByQuery, documentMultiGet, documentReindex, documentDelete, documentUpdate)
+		documentDeleteByQuery, documentMultiGet, documentReindex, documentUpdate)
 
 	documentDeleteByQuery.Flags().StringVarP(&body, "body", "b", "", "json body to send with this request")
 	documentUpdate.Flags().StringVarP(&body, "body", "b", "", "json body to send with this request")
