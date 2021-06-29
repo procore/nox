@@ -1,2 +1,2 @@
-golang 1.15.6
-goreleaser 0.149.0
+golang 1.16.5
+goreleaser 0.172.1
